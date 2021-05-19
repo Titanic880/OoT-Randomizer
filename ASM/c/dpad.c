@@ -14,12 +14,9 @@ typedef void(*useItem_t)(z64_game_t* game, z64_link_t* link, uint8_t item);
 
 #define z64_playsfx   ((playsfx_t)      0x800C806C)
 #define z64_usebutton ((usebutton_t)    0x8038C9A0)
-#define z64_useitem   ((useItem_t)      0x8038C9A0)
 
 void handle_dpad() {
-
     pad_t pad_pressed = z64_game.common.input[0].pad_pressed;
-
     if (CAN_USE_DPAD && DISPLAY_DPAD){
         //Adult
         if(z64_file.link_age == 0) {
@@ -29,7 +26,6 @@ void handle_dpad() {
                 z64_UpdateEquipment(&z64_game, &z64_link);
                 z64_playsfx(0x835, (z64_xyzf_t*)0x80104394, 0x04, (float*)0x801043A0, (float*)0x801043A0, (float*)0x801043A8);
             }
-
             if (pad_pressed.dr && z64_file.hover_boots) {
                 if (z64_file.equip_boots == 3) z64_file.equip_boots = 1;
                 else z64_file.equip_boots = 3;
@@ -102,7 +98,6 @@ void draw_dpad() {
                 sprite_draw(db, &items_sprite, 0, 285, 66, 12, 12);
             }
         }
-
 		//Combined Shield
 		if(z64_file.equip_shield != 2 && z64_file.link_age == 1 && z64_file.hylian_shield) {
 			sprite_load(db, &items_sprite, 63, 1);
