@@ -15,8 +15,6 @@
                        0x00200000 | \
                        0x08000000)
 
-#define BLOCK_LENS ( \
-                    )
 //MODIFIED (Lens/Bean)
 //#define DISPLAY_DPAD        (((z64_file.iron_boots || z64_file.hover_boots) && z64_file.link_age==0) || \
 //                            (((z64_file.items[0x0E]==0x10) || z64_file.items[0x0D]==0x0F) &&z64_file.link_age==1) || \
@@ -24,6 +22,7 @@
 //MODIFIED (Shields)
 #define DISPLAY_DPAD          (((z64_file.iron_boots || z64_file.hover_boots) && z64_file.link_age==0) || \
                                 (z64_file.hylian_shield || z64_file.deku_shield) && z64_file.link_age==1 || \
+                                (z64_file.items[Z64_SLOT_NUT] == Z64_ITEM_NUT && z64_file.link_age==1) || \
                                  z64_file.items[0x07] == 0x07 || z64_file.items[0x07] == 0x08)
 //ORIGINAL
 //#define DISPLAY_DPAD        (((z64_file.iron_boots || z64_file.hover_boots) && z64_file.link_age==0) || \
@@ -36,7 +35,7 @@
 
 #define CAN_USE_OCARINA     (z64_game.pause_ctxt.state==0 && (z64_file.items[0x07] == 0x07 || z64_file.items[0x07] == 0x08) && !z64_game.restriction_flags.ocarina && ((z64_link.state_flags_1 & BLOCK_OCARINA) == 0))
 
-#define CAN_USE_LENS        (z64_game.pause_ctxt.state==0 && (z64_file.items[0x0E] == 0x10) && !z64_game.restriction_flags.b_button)
+#define CAN_NUTT            (z64_game.pause_ctxt.state==0 && z64_file.items[Z64_SLOT_NUT] == Z64_ITEM_NUT)
 void handle_dpad();
 void draw_dpad();
 
