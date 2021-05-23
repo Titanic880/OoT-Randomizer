@@ -1549,7 +1549,6 @@ def patch_rom(spoiler:Spoiler, world:World, rom:Rom):
         set_deku_salesman_data(rom)
 
     # Update scrub messages.
-    shuffle_messages.scrubs_message_ids = []
     for text_id, message in scrub_message_dict.items():
         update_message_by_id(messages, text_id, message)
         if world.shuffle_scrubs == 'random':

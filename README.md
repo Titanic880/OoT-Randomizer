@@ -135,7 +135,6 @@ do that.
 * New `#Vanilla` item category for Plandomizer allows placing the item normally at the location.
 * New Plandomizer support for defining custom item groups.
 * Entrance Randomizer: Allow Kakariko Potion Shop and Impa's House to have their entrances appear in different areas if all hints are off.
-* Text Shuffle: Expanded the "Shuffled except Hints and Keys" to include some shop and scrub text, and renamed "Shuffled except Important Text".
 * Updated presets.
 * Added a commandline flag to use a preset by name. This still allows supplying additional settings, e.g. to control cosmetics and ROM output.
 * Added internal tracking of what items were where in vanilla OoT.
