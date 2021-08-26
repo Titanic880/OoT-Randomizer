@@ -1,9 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\c",
-    "\\src"
+    "\\build",
+    "\\c"
   ],
-  "SelectedNode": "\\c\\get_items.c",
+  "SelectedNode": "\\c\\dpad.h",
   "PreviewInSolutionExplorer": false
 }

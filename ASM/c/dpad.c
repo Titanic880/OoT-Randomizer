@@ -34,14 +34,7 @@ void handle_dpad() {
         }
         //Child
         if(z64_file.link_age == 1) {
-            if (pad_pressed.dr && CAN_USE_OCARINA && CAN_NUTT) {   //Bean (Repurposed to NUT)
-                z64_usebutton(&z64_game,&z64_link,z64_file.items[Z64_SLOT_NUT], -1);
-            }
-            /*
-            if (pad_pressed.dl) {   //Lens
-                z64_usebutton(&z64_game, &z64_link, z64_file.items[0x0D], 1);
-            }
-			*/
+			if (pad_pressed.dr && !OUT_OF_NUTS) z64_usebutton(&z64_game,&z64_link,z64_file.items[Z64_SLOT_NUT], -1);
 			//Combined Shield
 			if(pad_pressed.dl && (z64_file.deku_shield || z64_file.hylian_shield)) {
 				if(z64_file.equip_shield != 2 && z64_file.hylian_shield){
@@ -68,7 +61,7 @@ void draw_dpad() {
         gDPPipeSync(db->p++);
         gDPSetCombineMode(db->p++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
         uint16_t alpha = z64_game.hud_alpha_channels.minimap;
-        
+
         if (alpha == 0xAA) alpha = 0xFF;
         gDPSetPrimColor(db->p++, 0, 0, 0xFF, 0xFF, 0xFF, alpha);
         sprite_load(db, &dpad_sprite, 0, 1);
@@ -102,38 +95,25 @@ void draw_dpad() {
 			sprite_load(db, &items_sprite, 63, 1);
 			sprite_draw(db, &items_sprite, 0, 260, 66, 12, 12);
 		}
-		else if (z64_file.equip_shield != 1 && z64_file.link_age == 1 && z64_file.deku_shield) {
-			sprite_load(db, &items_sprite, 62, 1);
-			sprite_draw(db, &items_sprite, 0, 260, 66, 12, 12);
-		}
-		//NUTTT
-        if (z64_file.items[0x01] == 0x01 && z64_file.link_age == 1) {
-            sprite_load(db, &items_sprite, 1, 1);
-            sprite_draw(db, &items_sprite, 0, 285, 66, 12, 12);
-        }       
-		/*
-        //Beans
-        if (z64_file.items[0x0E] == 0x10 && z64_file.link_age == 1) {
-            if (alpha == 0xFF && !CAN_USE_LENS) gDPSetPrimColor(db->p++, 0, 0, 0xFF, 0xFF, 0xFF, 0x46);
-            sprite_load(db, &items_sprite, z64_file.items[0x0E], 1);
-            sprite_draw(db, &items_sprite, 0, 285, 66, 12, 12);
-        }
-        //Lens
-        if (z64_file.items[0x0E] == 0x10 && z64_file.link_age == 1) {
-            if (alpha == 0xFF && !CAN_USE_LENS) gDPSetPrimColor(db->p++, 0, 0, 0xFF, 0xFF, 0xFF, 0x46);
-            sprite_load(db, &items_sprite, z64_file.items[0x0D], 1);
+        else if (z64_file.equip_shield != 1 && z64_file.link_age == 1 && z64_file.deku_shield) {
+            sprite_load(db, &items_sprite, 62, 1);
             sprite_draw(db, &items_sprite, 0, 260, 66, 12, 12);
         }
-        */
-		
+		//NUTTT
+        if (z64_file.items[Z64_SLOT_NUT] == Z64_ITEM_NUT && z64_file.link_age == 1) {
+            sprite_load(db, &items_sprite, 1, 1);
+            if(z64_file.ammo[Z64_ITEM_NUT] == 0) sprite_draw(db, &items_sprite, 0, 285, 66, 12, 12);
+            else sprite_draw(db, &items_sprite, 0, 285, 66, 12, 12);
+        }
         //Ocarina
         if (z64_file.items[0x07] == 0x07 || z64_file.items[0x07] == 0x08){
-            if(alpha==0xFF && !CAN_USE_OCARINA) gDPSetPrimColor(db->p++, 0, 0, 0xFF, 0xFF, 0xFF, 0x46);
+            if (alpha == 0xFF && !CAN_USE_OCARINA) gDPSetPrimColor(db->p++, 0, 0, 0xFF, 0xFF, 0xFF, 0x46);
             sprite_load(db, &items_sprite, z64_file.items[0x07], 1);
             sprite_draw(db, &items_sprite, 0, 273, 77, 12,12);
         }
-
         gDPPipeSync(db->p++);
+
+        
+
     }
 }
-
