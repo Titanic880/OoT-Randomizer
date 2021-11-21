@@ -34,21 +34,21 @@ void handle_dpad() {
         }
         //Child
         if(z64_file.link_age == 1) {
-			if (pad_pressed.dr && !OUT_OF_NUTS) z64_usebutton(&z64_game,&z64_link,z64_file.items[Z64_SLOT_NUT], -1);
-			//Combined Shield
-			if(pad_pressed.dl && (z64_file.deku_shield || z64_file.hylian_shield)) {
-				if(z64_file.equip_shield != 2 && z64_file.hylian_shield){
-					z64_file.equip_shield = 2;
-					z64_UpdateEquipment(&z64_game, &z64_link);
-					z64_playsfx(0x835, (z64_xyzf_t*)0x80104394, 0x04, (float*)0x801043A0, (float*)0x801043A0, (float*)0x801043A8);
-				}
-				else if(z64_file.equip_shield != 1 && z64_file.deku_shield) {
-					z64_file.equip_shield = 1;
-					z64_UpdateEquipment(&z64_game, &z64_link);
-					z64_playsfx(0x835, (z64_xyzf_t*)0x80104394, 0x04, (float*)0x801043A0, (float*)0x801043A0, (float*)0x801043A8);
-				}
-			}
-		}
+			     if (pad_pressed.dr && z64_file.ammo[Z64_ITEM_NUT] > 0) z64_usebutton(&z64_game,&z64_link,z64_file.items[Z64_SLOT_NUT], -1);
+			     //Combined Shield
+			     if(pad_pressed.dl && (z64_file.deku_shield || z64_file.hylian_shield)) {
+				         if(z64_file.equip_shield != 2 && z64_file.hylian_shield){
+					              z64_file.equip_shield = 2;
+					              z64_UpdateEquipment(&z64_game, &z64_link);
+					              z64_playsfx(0x835, (z64_xyzf_t*)0x80104394, 0x04, (float*)0x801043A0, (float*)0x801043A0, (float*)0x801043A8);
+				         }
+				         else if(z64_file.equip_shield != 1 && z64_file.deku_shield) {
+					              z64_file.equip_shield = 1;
+					              z64_UpdateEquipment(&z64_game, &z64_link);
+					              z64_playsfx(0x835, (z64_xyzf_t*)0x80104394, 0x04, (float*)0x801043A0, (float*)0x801043A0, (float*)0x801043A8);
+				         }
+			     }
+		    }
 		if (pad_pressed.dd && CAN_USE_OCARINA){
 			z64_usebutton(&z64_game,&z64_link,z64_file.items[0x07], 2);
 		}
@@ -113,7 +113,7 @@ void draw_dpad() {
         }
         gDPPipeSync(db->p++);
 
-        
+
 
     }
 }

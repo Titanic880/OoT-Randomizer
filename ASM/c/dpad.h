@@ -14,10 +14,15 @@
                        0x00000800 | \
                        0x00200000 | \
                        0x08000000)
-					   
-#define OUT_OF_NUTS (z64_file.ammo[Z64_ITEM_NUT] == 0)
 
-#define DISPLAY_DPAD        (((z64_file.iron_boots || z64_file.hover_boots) && z64_file.link_age == 0) || z64_file.items[0x07] == 0x07 || z64_file.items[0x07] == 0x08)
+//MODIFIED (Shields)
+#define DISPLAY_DPAD          (((z64_file.iron_boots || z64_file.hover_boots) && z64_file.link_age==0)  || \
+                               ((z64_file.hylian_shield || z64_file.deku_shield) 							          || \
+																(z64_file.items[Z64_SLOT_NUT] == Z64_ITEM_NUT)) && z64_file.link_age==1 || \
+                                 z64_file.items[0x07] == 0x07 || z64_file.items[0x07] == 0x08)
+//ORIGINAL
+//#define DISPLAY_DPAD        (((z64_file.iron_boots || z64_file.hover_boots) && z64_file.link_age==0) || \
+                                 z64_file.items[0x07] == 0x07 || z64_file.items[0x07] == 0x08)
 
 #define CAN_USE_DPAD        (((z64_link.state_flags_1 & BLOCK_DPAD) == 0) && \
                             ((uint32_t)z64_ctxt.state_dtor==z64_state_ovl_tab[3].vram_dtor) && \
